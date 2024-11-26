@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  jmeter-test:
+  Automation_UI:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,7 +29,9 @@ jobs:
       - name: run script
         run: |
           cd OTF_script
-          ls
+          mvn clean test
+          mvn test
+
           
 
       - name: Upload JMeter Results
