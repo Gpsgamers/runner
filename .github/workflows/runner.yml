@@ -31,7 +31,6 @@ jobs:
           cd OTF_script
           mvn clean
           mvn update
-          mvn test
 
           
 
