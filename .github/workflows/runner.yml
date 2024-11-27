@@ -29,7 +29,8 @@ jobs:
       - name: run script
         run: |
           cd OTF_script
-          mvn clean test
+          mvn clean
+          mvn update
           mvn test
 
           
