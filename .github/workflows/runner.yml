@@ -17,8 +17,7 @@ jobs:
       - name: install requirments
         run: |
           sudo apt update
-          sudo apt install -y openjdk-11-jdk wget
-          sudo apt install maven -y
+          sudo apt install -y openjdk-17-jdk wget maven
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install ./google-chrome-stable_current_amd64.deb -y
 
