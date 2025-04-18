@@ -1,53 +1,32 @@
-name: Automation script
+name: CI Workflow
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  Automation_UI:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      # Step 1: Check out the repository
+      - name: Checkout code
         uses: actions/checkout@v3
-        
-      - name: install requirments
-        run: |
-          sudo apt update
-          sudo apt install -y openjdk-17-jdk wget maven
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install ./google-chrome-stable_current_amd64.deb -y
 
-      - name: clone repo
-        run: |
-          git clone https://github.com/Gpsgamers/OTF_script.git
-
-      - name: run script
-        run: |
-          cd OTF_script
-          mvn clean
-          mvn test -X
-
-      - name: Create artifact folder
-        run: |
-          mkdir -p output
-          echo "Sample artifact content" > output/info.txt   
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3.1.2
+      # Step 2: Set up a version of Node.js (adjust the version as needed)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          name: my-artifact
-          path: output/
-          
-      - name: deployment
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git checkout --orphan gh-pages
-          cd output
-          git add .
-          git commit -m "Deploy JMeter report"
-          git push --force origin gh-pages
+          node-version: 16
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run tests
+      - name: Run tests
+        run: npm test
