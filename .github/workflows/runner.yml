@@ -31,13 +31,16 @@ jobs:
           mvn clean
           mvn test -X
 
-          
+      - name: Create artifact folder
+        run: |
+          mkdir -p output
+          echo "Sample artifact content" > output/info.txt   
 
-      - name: Upload JMeter Results
+      - name: Upload artifact
         uses: actions/upload-artifact@v3.1.2
         with:
-          name: jmeter-results
-          path: output
+          name: my-artifact
+          path: output/
           
       - name: deployment
         run: |
