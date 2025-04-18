@@ -24,8 +24,8 @@ jobs:
           node-version: 16
 
       # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm install
+      - name: display nmp version
+        run: npm -v
 
       # Step 4: Run tests
       - name: Run tests
